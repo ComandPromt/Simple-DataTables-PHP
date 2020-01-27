@@ -3,28 +3,52 @@
 <html lang="es">
 
 <head>
+
 	<meta charset="UTF-8">
-	<title>DataTables</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Lista de canciones</title>
+	
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
 	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	
+	<style type="text/css">
+            .row-centered {
+                text-align:center;
+            }
+            .col-centered {
+                display:inline-block;
+                float:none;
+                text-align:left;
+                margin-right:-4px;
+            }
+           
+        </style>
+	
 </head>
 
 <body>
 
-	<div class="content">
+	<div class="container">
 	
-		<div class="row">
+		<div class="row row-centered">
 		
-			<div style="width:94%;padding-left:5%;padding-top:2%;">
-			
-				<table class="table display AllDataTables row">
+		<div class="col-lg-8 col-centered">
+		
+			<div style="padding-top:20px;width:95%;margin-left:-5px;">
+
+				<table class="table display AllDataTables">
 			
 					<thead>
 					
 						<tr>
 							<th>Cantante</th>
 							<th>Canción</th>
-							<th>Género</th>
+					
 						</tr>
 						
 					</thead>
@@ -37,12 +61,11 @@
 						
 						$mysqli->set_charset("utf8");
 					
-						$consulta = $mysqli->query('SELECT Cantante,Cancion,Genero FROM musica ORDER BY Id');
+						$consulta = $mysqli->query('SELECT Cantante,Cancion,Genero FROM musica ORDER BY Cantante,Cancion');
 			
 						while($fila = $consulta->fetch_row()){
 							print '<tr><td>'.$fila[0].'</td>';
-							print '<td>'.$fila[1].'</td>';
-							print '<td>'.$fila[2].'</td></tr>';
+							print '<td>'.$fila[1].'</td></tr>';
 						}
 									
 						$mysqli->close();
@@ -72,15 +95,14 @@
 								"sLengthMenu":     "Mostrar _MENU_ registros",
 								"sZeroRecords":    "No se encontraron resultados",
 								"sEmptyTable":     "Ningún dato disponible en esta tabla",
-								"sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-								"sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+								"sInfo":           "<hr/> _START_ / _END_ || Total: _TOTAL_",
+								"sInfoEmpty":      "",
 								"sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
 								"sInfoPostFix":    "",
 								"sSearch":         "Buscar:",
 								"sUrl":            "",
 								"sInfoThousands":  ",",
 								"sLoadingRecords": "Cargando...",
-								
 								"oPaginate": {
 									"sFirst":    "Primero",
 									"sLast":     "Último",
@@ -100,7 +122,7 @@
 					} );
 					
 				</script>
-				
+				</div>
 			</div>
 			
 		</div>
